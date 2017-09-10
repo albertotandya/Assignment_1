@@ -109,23 +109,23 @@ public class GamePlay {
                 if (getLastCard() instanceof NormCards) {
                     if (category.equals("H")) {
                         Float now = new Float(((NormCards) card).getHardness());
-                        Float last = new Float(((NormCards) card).getHardness());
+                        Float last = new Float(((NormCards) getLastCard()).getHardness());
                         compare = now.compareTo(last);
                     } else if (category.equals("S")) {
                         Float now = new Float(((NormCards) card).getSpecGravity());
-                        Float last = new Float(((NormCards) card).getSpecGravity());
+                        Float last = new Float(((NormCards) getLastCard()).getSpecGravity());
                         compare = now.compareTo(last);
                     } else if (category.equals("C")) {
                         Float now = new Float(((NormCards) card).getCleavageValue());
-                        Float last = new Float(((NormCards) card).getCleavageValue());
+                        Float last = new Float(((NormCards) getLastCard()).getCleavageValue());
                         compare = now.compareTo(last);
                     } else if (category.equals("CA")) {
                         Float now = new Float(((NormCards) card).getCrustalAbunVal());
-                        Float last = new Float(((NormCards) card).getCrustalAbunVal());
+                        Float last = new Float(((NormCards) getLastCard()).getCrustalAbunVal());
                         compare = now.compareTo(last);
                     } else if (category.equals("EV")) {
                         Float now = new Float(((NormCards) card).getEcoValueValue());
-                        Float last = new Float(((NormCards) card).getEcoValueValue());
+                        Float last = new Float(((NormCards) getLastCard()).getEcoValueValue());
                         compare = now.compareTo(last);
                     }
                     if (compare > 0) {
