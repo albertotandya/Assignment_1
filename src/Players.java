@@ -26,11 +26,11 @@ public class Players {
         String lastPlayedCard;
         if (game.firstCardPlayed() && !(game.playAgain(this))) {
             if (game.getLastCard() instanceof NormCards) {
-                lastPlayedCard = "Card played -> " + game.getLastCard().getCardName() + " " +
-                        "Hardness: " + ((NormCards) game.getLastCard()).getHardness() + " " +
-                        "Specific Gravity: " + ((NormCards) game.getLastCard()).getSpecGravity() + " " +
-                        "Cleavage: " + ((NormCards) game.getLastCard()).getCleavage() + " " +
-                        "Crustal Abundance: " + ((NormCards) game.getLastCard()).getCrustalAbun() + " " +
+                lastPlayedCard = "Card played -> " + game.getLastCard().getCardName() + ", " +
+                        "Hardness: " + ((NormCards) game.getLastCard()).getHardness() + ", " +
+                        "Specific Gravity: " + ((NormCards) game.getLastCard()).getSpecGravity() + ", " +
+                        "Cleavage: " + ((NormCards) game.getLastCard()).getCleavage() + ", " +
+                        "Crustal Abundance: " + ((NormCards) game.getLastCard()).getCrustalAbun() + ", " +
                         "Economic Value: " + ((NormCards) game.getLastCard()).getEcoValue() + "\n";
             } else {
                 lastPlayedCard = "Card Played -> " + ((TrumpCards) game.getLastCard()).getCardName() + "\n";
@@ -43,14 +43,15 @@ public class Players {
             lastPlayedCard = "Game start!";
             newCategory(game);
         } while (!finishTurn) {
-            System.out.println("Choose your card or enter 'P' to pass");
+            System.out.println(displayHandCards() + "\n" + game.categoryDesc() + "\n" + lastPlayedCard + "\n" + getPlayerName() + ", choose your card or enter 'P' to pass");
+            System.out.println();
             String cardChoice = input.nextLine();
             if (cardChoice.toUpperCase().equals("P")) {
                 drawCards(game.getDeckCards().cardDrawn());
                 finishTurn = true;
             } else {
                 try {
-                    cardNum = Integer.parseInt(cardChoice);
+                    cardNum = Integer.parseInt(cardChoice) - 1;
                     Cards playedcard = getCards(cardNum);
                     boolean contPlay = game.playCard(playedcard, this);
                     if (game.getCategory().equals("ANY")) {
@@ -120,11 +121,11 @@ public class Players {
     }
 
     public void newCategory(GamePlay newRnd) {
-        System.out.println("H for Hardness, S for Specific Gravity, C for Cleavage, CA for Crustal Abundance, EV for Economic Value");
+        System.out.println("\n" + displayHandCards() + "H for Hardness, S for Specific Gravity, C for Cleavage, CA for Crustal Abundance, EV for Economic Value\n" + getPlayerName() + ", choose the mode");
         String choice = input.nextLine();
         choice = choice.toUpperCase();
         while (!(choice.equals("H") || choice.equals("S") || choice.equals("C") || choice.equals("CA") || choice.equals("EV"))) {
-            System.out.println("H for Hardness, S for Specific Gravity, C for Cleavage, CA for Crustal Abundance, EV for Economic Value");
+            System.out.println("\nInvalid mode!\nH for Hardness, S for Specific Gravity, C for Cleavage, CA for Crustal Abundance, EV for Economic Value" + getPlayerName() + ", choose the mode");
             choice = input.nextLine();
             choice = choice.toUpperCase();
         }
