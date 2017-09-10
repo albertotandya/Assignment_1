@@ -3,7 +3,7 @@ public class TrumpCards extends Cards {
         super((name));
     }
 
-    public String cardPeffect() {
+    public String cardEffect() {
         String effect = "";
         String a = getCardName();
         if(a.equals("The Mineralogist")) {
