@@ -9,7 +9,7 @@ public class Deck {
         cardDeck = cardlist;
     }
 
-    public Cards drawCard() {
+    public Cards cardDrawn() {
         int a = new Random().nextInt(cardDeck.size());
         Cards draw = cardDeck.get(a);
         cardDeck.remove(a);
