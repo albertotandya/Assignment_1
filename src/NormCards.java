@@ -1,12 +1,12 @@
 public class NormCards extends Cards {
-    float hardness;
-    float specGravity;
-    String cleavage;
-    int cleavageVal;
-    String crustalAbun;
-    int crustalAbunVal;
-    String ecoValue;
-    int ecoValueValue;
+    private float hardness;
+    private float specGravity;
+    private String cleavage;
+    private int cleavageVal;
+    private String crustalAbun;
+    private int crustalAbunVal;
+    private String ecoValue;
+    private int ecoValueValue;      //defining the variables
 
     public NormCards (String name, float hard, float specGrav,String cle, String crustAbun, String ecoVal) {
         super(name);
@@ -18,8 +18,8 @@ public class NormCards extends Cards {
         cleavageVal = cleavageValueConverter();
         crustalAbunVal = abundaceValueConverter();
         ecoValueValue = ecoValueConverter();
+    }       //creating the constructor
 
-    }
     public float getHardness() {
         return hardness;
     }
@@ -50,9 +50,9 @@ public class NormCards extends Cards {
 
     public int getEcoValueValue() {
         return ecoValueValue;
-    }
+    }       //getter for all of the variables
 
-    public int cleavageValueConverter() {
+    private int cleavageValueConverter() {      //to convert the cleavage into integer value, so it can be compared
         int val = 0;
         String a = getCleavage();
         if (a.equals("none")) {
@@ -89,7 +89,7 @@ public class NormCards extends Cards {
         return val;
     }
 
-    public int abundaceValueConverter() {
+    private int abundaceValueConverter() {      //to convert the crustal abundance into integer value, so it can be compared
         int val = 0;
         String a = getCrustalAbun();
         if(a.equals("ultratrace")) {
@@ -113,7 +113,7 @@ public class NormCards extends Cards {
         return val;
     }
 
-    public int ecoValueConverter() {
+    private int ecoValueConverter() {       //to convert the economic value into integer value, so it can be compared
         int val = 0;
         String a = getEcoValue();
         if(a.equals("trivial")) {

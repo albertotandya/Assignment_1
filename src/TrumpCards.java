@@ -1,9 +1,9 @@
 public class TrumpCards extends Cards {
-    TrumpCards(String name) {
+    public TrumpCards(String name) {
         super((name));
-    }
+    }       //creating the constructor
 
-    public String cardEffect() {
+    public String cardEffect() {        //to apply the effect of the supertrump card to the game
         String effect = "";
         String a = getCardName();
         if(a.equals("The Mineralogist")) {
@@ -27,7 +27,7 @@ public class TrumpCards extends Cards {
         return effect;
     }
 
-    public String cardEffectDesc() {
+    public String cardEffectDesc() {        //to give the effect description of the supertrump card
         String desc = "";
         String a = getCardName();
         if(a.equals("The Mineralogist")) {
