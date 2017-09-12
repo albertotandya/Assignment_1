@@ -41,8 +41,6 @@ public class GamePlay {
 
     public String getLastPlayer() { return lastPlayer; }        //getter for the variables
 
-    public ArrayList<Cards> getPlayedCards() { return playedCards; }
-
     public Cards getLastCard() {
         return playedCards.get(playedCards.size()-1);
     }       //to know the last card played
