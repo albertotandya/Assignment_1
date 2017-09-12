@@ -24,6 +24,7 @@ public class GamePlay {
                 player.drawCards(allCards.cardRemoved());
             }
         }
+        resetPass();
     }
 
     public String getCategory() {
@@ -39,6 +40,8 @@ public class GamePlay {
     }
 
     public String getLastPlayer() { return lastPlayer; }        //getter for the variables
+
+    public ArrayList<Cards> getPlayedCards() { return playedCards; }
 
     public Cards getLastCard() {
         return playedCards.get(playedCards.size()-1);
@@ -146,6 +149,13 @@ public class GamePlay {
         if (getLastPlayer().equals(players.getPlayerName())) {
             decide = true;
         }
+        resetPass();
         return decide;
+    }
+
+    public void resetPass() {
+        for (Players name : players) {
+            name.passReset();
+        }
     }
 }
