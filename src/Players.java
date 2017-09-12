@@ -4,6 +4,7 @@ import java.util.Scanner;       //importing the needed files
 public class Players {
     private ArrayList<Cards> handCard;
     private String playerName;
+    private boolean passed;
     private Scanner input = new Scanner(System.in);     //defining the variables
 
     public Players(String name) {
@@ -23,11 +24,22 @@ public class Players {
 
     public void playTurn(GamePlay game) {       //player play his turn
         boolean turnEnd = false;
+        String cardChoice;
         String lastCard = displayLastCardDesc(game);
         while (!turnEnd) {
-            System.out.println(displayHandCards() + "\n" + game.categoryDesc() + "\n" + lastCard + "\n" + getPlayerName() + ", choose your card or enter 'P' to pass");
-            String cardChoice = input.nextLine();
-            turnEnd = cardChoiceOption(cardChoice, game);
+            if (!passed){       //to check if the player has not passed yet
+                System.out.println(displayHandCards() + "\n" + game.categoryDesc() + "\n" + lastCard + "\n" + getPlayerName() + ", choose your card or enter 'P' to pass");
+                cardChoice = input.nextLine();
+                if (cardChoice.toUpperCase().equals("P")) {     //to see if the player choose to pass
+                    passStatus(game);
+                    turnEnd = true;
+                } else {
+                    turnEnd = cardChoiceOption(cardChoice, game);
+                }
+            } else {        //or else, the player already passed
+                System.out.println(getPlayerName()+", you already passed");
+                turnEnd = true;
+            }
         }
         if (handCard.size() == 0) {     //to check if the player has no more card
             game.setLastPlayer(game.getPlayers().get((game.getPlayers().indexOf(this)+1)%game.getPlayers().size()).getPlayerName());
@@ -38,10 +50,6 @@ public class Players {
     private boolean cardChoiceOption(String cardChoice, GamePlay game) {     //to decide if the player's turn is done or not
         boolean finishTurn = false;
         int cardNum;
-        if (cardChoice.toUpperCase().equals("P")) {     //to check if the player choose to PASS
-            drawCards(game.getDeckCards().cardRemoved());
-            finishTurn = true;
-        } else {
             try {
                 cardNum = Integer.parseInt(cardChoice) - 1;     //change the input from String to integer
                 Cards playedcard = getCards(cardNum);
@@ -81,7 +89,6 @@ public class Players {
             } catch (Throwable e) {
                 System.out.println(e.getMessage());
             }
-        }
         return finishTurn;
     }
 
@@ -154,6 +161,15 @@ public class Players {
             }
         }
         return winCond;
+    }
+
+    public void passStatus(GamePlay game) {
+        passed = true;
+        drawCards(game.getDeckCards().cardRemoved());
+    }
+
+    public void passReset() {
+        passed = false;
     }
 
     public void leave(GamePlay game) {      //player leave the game
